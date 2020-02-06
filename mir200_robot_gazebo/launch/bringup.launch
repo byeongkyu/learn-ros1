@@ -1,5 +1,0 @@
-<launch>
-    <include file="$(find mir200_robot_gazebo)/launch/bringup_gazebo.launch"/>
-    <include file="$(find mir200_robot_gazebo)/launch/spawn_robot.launch"/>
-    <include file="$(find mir200_robot_gazebo)/launch/merge_laser_scanner.launch"/>
-</launch>

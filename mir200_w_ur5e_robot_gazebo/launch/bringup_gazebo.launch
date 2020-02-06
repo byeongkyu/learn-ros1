@@ -1,5 +1,5 @@
 <launch>
-    <env name="GAZEBO_RESOURCE_PATH" value="$(find mir200_robot_gazebo)"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="$(find mir200_w_ur5e_robot_gazebo)"/>
     <env name="QT_AUTO_SCREEN_SCALE_FACTOR" value="1"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">

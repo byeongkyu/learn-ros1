@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mir200_robot_gazebo</name>
+  <name>mir200_w_ur5e_robot_navigation</name>
   <version>0.0.0</version>
-  <description>The mir200_robot_gazebo package</description>
+  <description>The mir200_w_ur5e_robot_navigation package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/mir200_robot_gazebo</url> -->
+  <!-- <url type="website">http://wiki.ros.org/mir200_w_ur5e_robot_navigation</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -49,9 +49,9 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>mir200_robot_description</build_depend>
-  <build_export_depend>mir200_robot_description</build_export_depend>
-  <exec_depend>mir200_robot_description</exec_depend>
+  <exec_depend>gmapping</exec_depend>
+  <exec_depend>navigation</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
