@@ -1,0 +1,6 @@
+NavfnROS:
+  visualize_potential: false
+  allow_unknown: false
+  planner_window_x: 1.0
+  planner_window_y: 1.0
+  default_tolerance: 0.0

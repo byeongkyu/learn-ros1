@@ -1,7 +1,7 @@
 <launch>
     <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen" launch-prefix="bash -c 'sleep 4.0; $0 $@' ">
         <param name="destination_frame" value="base_link"/>
-        <param name="scan_destination_topic" value="scan_merged"/>
+        <param name="scan_destination_topic" value="scan"/>
         <param name="laserscan_topics" value ="/front_scan /rear_scan" /> <!-- LIST OF THE LASER SCAN TOPICS TO SUBSCRIBE -->
         <param name="angle_min" value="-3.141592"/>
         <param name="angle_max" value="3.141592"/>
