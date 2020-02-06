@@ -1,0 +1,10 @@
+<launch>
+    <env name="GAZEBO_RESOURCE_PATH" value="$(find mir200_robot_gazebo)"/>
+    <env name="QT_AUTO_SCREEN_SCALE_FACTOR" value="1"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true" />
+        <arg name="verbose" value="true"/>
+        <arg name="world_name" value="world/nav_demo.world"/>
+    </include>
+</launch>
