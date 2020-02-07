@@ -29,6 +29,20 @@
         <mu2>0.0</mu2>
     </gazebo>
 
+    <gazebo reference="l_wheel">
+        <mu1>100.0</mu1>
+        <mu2>100.0</mu2>
+        <kp value="10000.0" />
+        <kd value="1.0" />
+    </gazebo>
+
+    <gazebo reference="r_wheel">
+        <mu1>100.0</mu1>
+        <mu2>100.0</mu2>
+        <kp value="10000.0" />
+        <kd value="1.0" />
+    </gazebo>
+
     <gazebo>
         <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
             <alwaysOn>true</alwaysOn>
