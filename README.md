@@ -13,7 +13,6 @@ $ wstool init
 $ wstool merge https://gist.githubusercontent.com/byeongkyu/03c0c6063835c470de594e3aa521d8a4/raw/ros_tutorials3.rosinstall
 $ wstool update
 $ rosdep install --from-paths . --ignore-src -r -y
-$ find -name 'requirements.txt' | xargs -L 1 sudo pip install -U -r
 $ catkin build
 ```
 
