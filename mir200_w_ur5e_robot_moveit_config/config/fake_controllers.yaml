@@ -1,0 +1,9 @@
+controller_list:
+  - name: fake_arm_controller
+    joints:
+      - ur5e_shoulder_pan_joint
+      - ur5e_shoulder_lift_joint
+      - ur5e_elbow_joint
+      - ur5e_wrist_1_joint
+      - ur5e_wrist_2_joint
+      - ur5e_wrist_3_joint
