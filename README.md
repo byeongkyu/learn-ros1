@@ -38,6 +38,21 @@ $ catkin build
 
 <img src="./doc/rqt_joint_trajectory_controller.png" width="30%">
 
+---
+
+### For Navigation
+
+#### Map building
+
+    $ roslaunch mir200_w_ur5e_robot_navigation slam_gmapping.launch
+    $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+#### Navigation
+
+    $ roslaunch mir200_w_ur5e_robot_navigation bringup_navigation.launch
+
+
+---
 
 ### For MoveIt!
 

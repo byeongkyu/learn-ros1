@@ -1,0 +1,5 @@
+<launch>
+    <node name="slam_gmapping" type="slam_gmapping" pkg="gmapping" output="screen">
+        <remap from="scan" to="scan"/>
+    </node>
+</launch>
