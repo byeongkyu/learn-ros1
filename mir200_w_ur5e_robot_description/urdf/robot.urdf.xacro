@@ -261,4 +261,12 @@
         <child link="robotiq_arg2f_base_link"/>
         <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
     </joint>
+
+    <!-- EEF for grasp -->
+    <link name="gripper_eef" />
+    <joint name="gipper_eef_fixed" type="fixed">
+        <parent link="robotiq_arg2f_base_link"/>
+        <child link="gripper_eef" />
+        <origin xyz="0 0 0.13" rpy="0 0 0"/>
+    </joint>
 </robot>
