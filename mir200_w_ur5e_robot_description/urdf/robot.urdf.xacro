@@ -62,9 +62,10 @@
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 ${direction*pi/2}"/>
+                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
                 <geometry>
-                    <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_wheel.dae" scale="1 1 1"/>
+                    <!-- <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_wheel.dae" scale="1 1 1"/> -->
+                    <cylinder radius="0.0625" length="0.0345"/>
                 </geometry>
             </collision>
             <inertial>
@@ -77,7 +78,7 @@
         <joint name="${prefix}_wheel_joint" type="continuous">
             <parent link="base_link"/>
             <child link="${prefix}_wheel"/>
-            <origin xyz="0 ${direction*wheel_seperation/2} 0" rpy="0 0 0"/>
+            <origin xyz="0 ${direction*wheel_seperation/2} 0.0" rpy="0 0 0"/>
             <axis xyz="0 1 0"/>
         </joint>
     </xacro:macro>
@@ -91,9 +92,10 @@
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
                 <geometry>
-                    <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_front_caster_wheel.dae" scale="1 1 1"/>
+                    <!-- <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_front_caster_wheel.dae" scale="1 1 1"/> -->
+                    <cylinder radius="0.0625" length="0.032"/>
                 </geometry>
             </collision>
             <inertial>
@@ -106,7 +108,7 @@
         <joint name="${prefix}_front_caster_wheel_joint" type="fixed">
             <parent link="base_link"/>
             <child link="${prefix}_front_caster_wheel"/>
-            <origin xyz="0.3 ${direction*caster_wheel_seperation/2} 0.0001" rpy="0 0 0"/>
+            <origin xyz="0.3 ${direction*caster_wheel_seperation/2} 0.001" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
 
@@ -119,9 +121,10 @@
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
                 <geometry>
-                    <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_rear_caster_wheel.dae" scale="1 1 1"/>
+                    <!-- <mesh filename="package://mir200_w_ur5e_robot_description/meshes/mir200_rear_caster_wheel.dae" scale="1 1 1"/> -->
+                    <cylinder radius="0.0625" length="0.032"/>
                 </geometry>
             </collision>
             <inertial>
@@ -134,7 +137,7 @@
         <joint name="${prefix}_rear_caster_wheel_joint" type="fixed">
             <parent link="base_link"/>
             <child link="${prefix}_rear_caster_wheel"/>
-            <origin xyz="-0.3 ${direction*caster_wheel_seperation/2} 0.0001" rpy="0 0 0"/>
+            <origin xyz="-0.3 ${direction*caster_wheel_seperation/2} 0.001" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
 
