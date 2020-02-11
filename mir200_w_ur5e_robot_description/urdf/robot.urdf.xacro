@@ -19,7 +19,7 @@
     <xacro:property name="wheel_seperation" value="0.438"/>
     <xacro:property name="caster_wheel_seperation" value="0.410"/>
 
-    <xacro:property name="robot_weight" value="65.0"/>
+    <xacro:property name="robot_weight" value="100.0"/>
     <xacro:property name="robot_length" value="0.890"/>
     <xacro:property name="robot_width" value="0.580"/>
     <xacro:property name="robot_height" value="0.305"/>
@@ -70,8 +70,8 @@
             </collision>
             <inertial>
                 <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
-                <mass value="1.0"/>
-                <xacro:cylinder_inertia m="1.0" r="0.0625" h="0.0345"/>
+                <mass value="10.0"/>
+                <xacro:cylinder_inertia m="10.0" r="0.0625" h="0.0345"/>
             </inertial>
         </link>
 
@@ -100,8 +100,8 @@
             </collision>
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
-                <mass value="1.0"/>
-                <xacro:cylinder_inertia m="1.0" r="0.0625" h="0.032"/>
+                <mass value="10.0"/>
+                <xacro:cylinder_inertia m="10.0" r="0.0625" h="0.032"/>
             </inertial>
         </link>
 
@@ -129,8 +129,8 @@
             </collision>
             <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
-                <mass value="1.0"/>
-                <xacro:cylinder_inertia m="1.0" r="0.0625" h="0.032"/>
+                <mass value="10.0"/>
+                <xacro:cylinder_inertia m="10.0" r="0.0625" h="0.032"/>
             </inertial>
         </link>
 
