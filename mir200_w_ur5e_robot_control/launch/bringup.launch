@@ -1,7 +1,0 @@
-<launch>
-    <rosparam file="$(find mir200_w_ur5e_robot_control)/config/controllers.yaml" command="load"/>
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
-                        output="screen" args="joint_state_controller
-                                            arm_controller
-                                            gripper_controller"/>
-</launch>

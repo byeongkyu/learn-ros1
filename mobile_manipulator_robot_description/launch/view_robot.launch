@@ -1,0 +1,6 @@
+<launch>
+    <env name="QT_AUTO_SCREEN_SCALE_FACTOR" value="1"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(find mobile_manipulator_robot_description)/urdf/robot.urdf.xacro" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher"/>
+</launch>

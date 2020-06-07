@@ -1,0 +1,3 @@
+<launch>
+    <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find mobile_manipulator_robot_cartographer)/demo_2d.rviz" />
+</launch>

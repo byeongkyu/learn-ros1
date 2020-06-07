@@ -1,0 +1,12 @@
+base_global_planner: nav_core_adapter::GlobalPlannerAdapter
+GlobalPlannerAdapter:
+  planner_name: dlux_global_planner::DluxGlobalPlanner
+
+DluxGlobalPlanner:
+  potential_calculator: dlux_plugins::Dijkstra
+  traceback : dlux_plugins::GradientPath
+  print_statistics : true
+  neutral_cost : 50
+  scale : 3
+  path_caching : true
+  improvement_threshold : -1.0

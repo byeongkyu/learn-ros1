@@ -1,0 +1,17 @@
+<launch>
+    <include file="$(find mobile_manipulator_robot_gazebo)/launch/bringup.launch"/>
+    <include file="$(find mobile_manipulator_robot_control)/launch/bringup_controller.launch"/>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">
+        [l_rear_caster_rotate_joint, r_rear_caster_rotate_joint, l_front_caster_rotate, l_front_caster_rotate,
+            l_bogie_suspension_joint, r_bogie_suspension_joint]
+        </rosparam>
+        <param name="rate" value="200.0" />
+    </node>
+
+    <node name="f_lidar_topic_relay" type="relay" pkg="topic_tools" output="screen" args="front_scan scan"/>
+    <node name="r_lidar_topic_relay" type="relay" pkg="topic_tools" output="screen" args="rear_scan scan"/>
+    <!-- [l_rear_caster_rotate_joint, r_rear_caster_rotate_joint, l_rear_caster_wheel_joint, r_rear_caster_wheel_joint, l_front_caster_rotate, l_front_caster_rotate,
+            l_front_caster_wheel_joint, r_front_caster_wheel_joint, l_bogie_suspension_joint, r_bogie_suspension_joint] -->
+</launch>

@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<robot name="mobile_manipulator_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find mobile_manipulator_robot_description)/urdf/bogie_mobile_robot.urdf.xacro"/>
+
+    <!-- UR Related -->
+    <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+    <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+    <xacro:include filename="$(find ur_e_description)/urdf/ur5e.urdf.xacro" />
+    <xacro:arg name="kinematics_config" default="$(find ur_e_description)/config/ur5e_default.yaml"/>
+
+    <!-- Robotiq Gripper -->
+    <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+
+    <!-- Mobile Robot -->
+    <xacro:bogie_mobile_robot/>
+
+    <!-- Mount Box -->
+    <link name="mount_box">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://mobile_manipulator_robot_description/meshes/robot_mount_box.dae" scale="1 1 1"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://mobile_manipulator_robot_description/meshes/robot_mount_box.dae" scale="1 1 1"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="20.0"/>
+            <xacro:box_inertia m="20.0" x="0.750" y="0.4" z="0.45"/>
+        </inertial>
+    </link>
+
+    <joint name="mount_box_fixed" type="fixed">
+        <parent link="base_link"/>
+        <child link="mount_box"/>
+        <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    </joint>
+
+    <!-- UR5e -->
+    <xacro:ur5e_robot prefix="ur5e_" joint_limited="true"
+        shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+        shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+        elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+        wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+        wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+        wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+        kinematics_file="${load_yaml('$(arg kinematics_config)')}"
+    />
+
+    <joint name="ur5e_mount_fixed" type="fixed">
+        <parent link="mount_box"/>
+        <child link="ur5e_base_link"/>
+        <origin xyz="-0.2 0 0.45" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Robotiq Gripper -->
+    <xacro:robotiq_arg2f_85 prefix=""/>
+
+    <joint name="ur5e_tool0_to_gripper" type="fixed">
+        <parent link="ur5e_tool0"/>
+        <child link="robotiq_arg2f_base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+    </joint>
+
+    <!-- EEF for grasp -->
+    <link name="gripper_eef" />
+    <joint name="gipper_eef_fixed" type="fixed">
+        <parent link="robotiq_arg2f_base_link"/>
+        <child link="gripper_eef" />
+        <origin xyz="0 0 0.13" rpy="0 0 0"/>
+    </joint>
+
+</robot>

@@ -1,0 +1,38 @@
+robot_base_frame: base_footprint
+transform_tolerance: 0.4
+update_frequency: 5.0
+publish_frequency: 1.0
+obstacle_range: 3.0
+#mark_threshold: 1
+publish_voxel_map: true
+navigation_map:
+  map_topic: map
+
+obstacles:
+  observation_sources: front_scan_sensor rear_scan_sensor
+  front_scan_sensor: {
+    topic: front_scan,
+    sensor_frame: front_lidar,
+    observation_persistence: 0.0,
+    expected_update_rate: 0.5,
+    data_type: LaserScan,
+    clearing: true,
+    marking: true,
+    max_obstacle_height: 2.0,
+    min_obstacle_height: 0.0,
+    obstacle_range: 5.0,
+    raytrace_range: 5.5
+  }
+  rear_scan_sensor: {
+    topic: rear_scan,
+    sensor_frame: rear_lidar,
+    observation_persistence: 0.0,
+    expected_update_rate: 0.5,
+    data_type: LaserScan,
+    clearing: true,
+    marking: true,
+    max_obstacle_height: 2.0,
+    min_obstacle_height: 0.0,
+    obstacle_range: 5.0,
+    raytrace_range: 5.5
+  }

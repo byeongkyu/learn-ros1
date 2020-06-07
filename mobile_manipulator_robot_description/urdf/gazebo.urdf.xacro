@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <gazebo reference="l_wheel">
+        <mu1 value="200.0"/>
+        <mu2 value="200.0"/>
+        <kp value="10000000.0" />
+        <kd value="1.0" />
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/DarkYellow</material>
+    </gazebo>
+
+    <gazebo reference="r_wheel">
+        <mu1 value="200.0"/>
+        <mu2 value="200.0"/>
+        <kp value="10000000.0" />
+        <kd value="1.0" />
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/DarkYellow</material>
+    </gazebo>
+
+    <gazebo reference="l_rear_caster_wheel">
+        <mu1 value="1"/>
+        <mu2 value="1"/>
+        <kp value="10000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/Gray</material>
+    </gazebo>
+
+    <gazebo reference="r_rear_caster_wheel">
+        <mu1 value="1"/>
+        <mu2 value="1"/>
+        <kp value="10000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/Gray</material>
+    </gazebo>
+
+    <gazebo reference="l_front_caster_wheel">
+        <mu1 value="1"/>
+        <mu2 value="1"/>
+        <kp value="10000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/Gray</material>
+    </gazebo>
+
+    <gazebo reference="r_front_caster_wheel">
+        <mu1 value="1"/>
+        <mu2 value="1"/>
+        <kp value="10000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.0</minDepth>
+        <material>Gazebo/Gray</material>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+
+    <gazebo reference="l_bogie_suspension">
+        <material>Gazebo/DarkGray</material>
+    </gazebo>
+
+    <gazebo reference="r_bogie_suspension">
+        <material>Gazebo/DarkGray</material>
+    </gazebo>
+
+    <gazebo reference="l_rear_caster_rotate">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="r_rear_caster_rotate">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="l_front_caster_rotate">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="r_front_caster_rotate">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace></robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            <controlPeriod>0.001</controlPeriod>
+            <legacyModeNS>false</legacyModeNS>
+            <eStopTopic>emergency_stop</eStopTopic>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="front_lidar">
+        <sensor type="gpu_ray" name="front_laser_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>15</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>540</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-2.35619449</min_angle>
+                        <max_angle>2.35619449</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.10</min>
+                    <max>10.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_ros_front_lidar_controller" filename="libgazebo_ros_gpu_laser.so">
+                <topicName>front_scan</topicName>
+                <frameName>front_lidar</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="rear_lidar">
+        <sensor type="gpu_ray" name="rear_laser_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>15</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>540</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-2.35619449</min_angle>
+                        <max_angle>2.35619449</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.10</min>
+                    <max>10.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_ros_rear_lidar_controller" filename="libgazebo_ros_gpu_laser.so">
+                <topicName>rear_scan</topicName>
+                <frameName>rear_lidar</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

@@ -1,0 +1,9 @@
+<launch>
+        <rosparam file="$(find mobile_manipulator_robot_control)/config/controllers.yaml" command="load"/>
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="true"
+                output="screen" args="  joint_state_controller
+                                        base_controller
+                                        arm_controller
+                                        gripper_controller">
+        </node>
+</launch>

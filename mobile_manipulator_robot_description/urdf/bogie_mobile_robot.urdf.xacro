@@ -1,0 +1,315 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find mobile_manipulator_robot_description)/urdf/gazebo.urdf.xacro"/>
+    <xacro:include filename="$(find mobile_manipulator_robot_description)/urdf/inertia_macro.urdf.xacro"/>
+    <xacro:include filename="$(find mobile_manipulator_robot_description)/urdf/insert_transmission.urdf.xacro"/>
+
+
+    <xacro:property name="main_base_mass" value="60.0"/>
+    <xacro:property name="main_base_width" value="0.55"/>
+    <xacro:property name="main_base_depth" value="1.0"/>
+    <xacro:property name="main_base_height" value="0.3"/>
+
+    <xacro:property name="main_wheel_diameter" value="0.2"/>
+    <xacro:property name="main_wheel_mass" value="5.0"/>
+    <xacro:property name="main_wheel_thickness" value="0.08"/>
+
+    <xacro:property name="caster_wheel_diameter" value="0.12"/>
+    <xacro:property name="caster_wheel_length" value="0.04"/>
+    <xacro:property name="caster_wheel_mass" value="1.0"/>
+
+
+    <xacro:macro name="bogie_mobile_robot">
+        <link name="base_footprint"/>
+        <link name="base_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${main_base_depth} ${main_base_width} ${main_base_height}"/>
+                </geometry>
+                <material name="gray">
+                    <color rgba="0.6 0.6 0.6 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${main_base_depth} ${main_base_width} ${main_base_height}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="${main_base_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:box_inertia m="${main_base_mass}" x="${main_base_depth}" y="${main_base_width}" z="${main_base_height}"/>
+            </inertial>
+        </link>
+
+        <joint name="base_footprint_fixed" type="fixed">
+            <parent link="base_footprint"/>
+            <child link="base_link"/>
+            <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:macro name="bogie_wheel" params="prefix dir">
+            <link name="${prefix}_bogie_suspension">
+                <visual>
+                    <origin xyz="0 ${-dir*0.01} 0" rpy="0 0 0"/>
+                    <geometry>
+                        <box size="0.24 0.06 0.06"/>
+                    </geometry>
+                    <material name="dark_gray">
+                        <color rgba="0.3 0.3 0.3 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin xyz="0 ${-dir*0.01} 0" rpy="0 0 0"/>
+                    <geometry>
+                        <box size="0.24 0.06 0.06"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="5.0"/>
+                    <origin xyz="0 ${-dir*0.01} 0" rpy="0 0 0"/>
+                    <xacro:box_inertia m="5.0" x="0.24" y="0.06" z="0.06"/>
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_bogie_suspension_joint" type="continuous">
+                <parent link="base_link"/>
+                <child link="${prefix}_bogie_suspension"/>
+                <origin xyz="-0.25 ${dir*0.36} -0.05" rpy="0 0 0"/>
+                <axis xyz="0 1 0"/>
+            </joint>
+
+            <link name="${prefix}_wheel">
+                <visual>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${main_wheel_diameter/2}" length="${main_wheel_thickness}"/>
+                    </geometry>
+                    <material name="dark_yellow">
+                        <color rgba="0.3 0.3 0.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${main_wheel_diameter/2}" length="${main_wheel_thickness}"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="${main_wheel_mass}"/>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <!-- <xacro:cylinder_inertia m="${main_wheel_mass}" r="${main_wheel_diameter/2}" h="${main_wheel_thickness}"/>  -->
+                    <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0" />
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_wheel_joint" type="continuous">
+                <parent link="${prefix}_bogie_suspension"/>
+                <child link="${prefix}_wheel"/>
+                <origin xyz="0.25 ${dir*0.02} -0.05" rpy="0 0 0"/>
+                <axis xyz="0 1 0"/>
+            </joint>
+            <xacro:insert_velocity_transmission name="${prefix}_wheel_joint"/>
+
+            <link name="${prefix}_rear_caster_rotate">
+                <visual>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <cylinder radius="0.03" length="0.03"/>
+                    </geometry>
+                    <material name="blue">
+                        <color rgba="0 0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <cylinder radius="0.03" length="0.03"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="2.0"/>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <xacro:cylinder_inertia m="2.0" r="0.03" h="0.03"/>
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_rear_caster_rotate_joint" type="continuous">
+                <parent link="${prefix}_bogie_suspension"/>
+                <child link="${prefix}_rear_caster_rotate"/>
+                <origin xyz="-0.18 ${dir*0.01} 0" rpy="0 0 0"/>
+                <axis xyz="0 0 1"/>
+            </joint>
+
+            <link name="${prefix}_rear_caster_wheel">
+                <visual>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${caster_wheel_diameter/2}" length="${caster_wheel_length}"/>
+                    </geometry>
+                    <material name="dark_gray"/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${caster_wheel_diameter/2}" length="${caster_wheel_length}"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="${caster_wheel_mass}"/>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <xacro:cylinder_inertia m="${caster_wheel_mass}" r="${caster_wheel_diameter/2}" h="${caster_wheel_length}"/>
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_rear_caster_wheel_joint" type="continuous">
+                <parent link="${prefix}_rear_caster_rotate"/>
+                <child link="${prefix}_rear_caster_wheel"/>
+                <origin xyz="-0.02 0 -0.09" rpy="0 0 0"/>
+                <axis xyz="0 1 0"/>
+            </joint>
+        </xacro:macro>
+
+        <xacro:bogie_wheel prefix="l" dir="1"/>
+        <xacro:bogie_wheel prefix="r" dir="-1"/>
+
+        <xacro:macro name="front_caster_wheel" params="prefix dir">
+            <link name="${prefix}_front_caster_rotate">
+                <visual>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <cylinder radius="0.03" length="0.03"/>
+                    </geometry>
+                    <material name="red">
+                        <color rgba="1.0 0 0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <cylinder radius="0.03" length="0.03"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="0.1"/>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <xacro:cylinder_inertia m="0.1" r="0.03" h="0.03"/>
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_front_caster_rotate_joint" type="continuous">
+                <parent link="base_link"/>
+                <child link="${prefix}_front_caster_rotate"/>
+                <origin xyz="0.43 ${dir*0.37} -0.05" rpy="0 0 0"/>
+                <axis xyz="0 0 1"/>
+            </joint>
+
+            <link name="${prefix}_front_caster_wheel">
+                <visual>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${caster_wheel_diameter/2}" length="${caster_wheel_length}"/>
+                    </geometry>
+                    <material name="dark_gray"/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <geometry>
+                        <cylinder radius="${caster_wheel_diameter/2}" length="${caster_wheel_length}"/>
+                    </geometry>
+                </collision>
+                <inertial>
+                    <mass value="${caster_wheel_mass}"/>
+                    <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                    <xacro:cylinder_inertia m="${caster_wheel_mass}" r="${caster_wheel_diameter/2}" h="${caster_wheel_length}"/>
+                </inertial>
+            </link>
+
+            <joint name="${prefix}_front_caster_wheel_joint" type="continuous">
+                <parent link="${prefix}_front_caster_rotate"/>
+                <child link="${prefix}_front_caster_wheel"/>
+                <origin xyz="-0.02 0 -0.09" rpy="0 0 0"/>
+                <axis xyz="0 1 0"/>
+            </joint>
+        </xacro:macro>
+
+        <xacro:front_caster_wheel prefix="l" dir="1"/>
+        <xacro:front_caster_wheel prefix="r" dir="-1"/>
+
+        <link name="front_lidar_mount">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.03" length="0.08"/>
+                </geometry>
+                <material name="orange">
+                    <color rgba="0.8 0.6 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.03" length="0.08"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.5"/>
+                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                <xacro:cylinder_inertia m="0.5" r="0.03" h="0.1"/>
+            </inertial>
+        </link>
+
+        <joint name="front_lidar_mount_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="front_lidar_mount"/>
+            <origin xyz="0.525 0.3 0.09" rpy="0 0 0"/>
+        </joint>
+
+        <link name="front_lidar"/>
+        <joint name="front_lidar_fixed_joint" type="fixed">
+            <parent link="front_lidar_mount"/>
+            <child link="front_lidar"/>
+            <origin xyz="0 0 0.02" rpy="0 0 ${45*pi/180}"/>
+        </joint>
+
+        <link name="rear_lidar_mount">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.03" length="0.08"/>
+                </geometry>
+                <material name="orange">
+                    <color rgba="0.8 0.6 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.03" length="0.08"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.5"/>
+                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                <xacro:cylinder_inertia m="0.5" r="0.03" h="0.1"/>
+            </inertial>
+        </link>
+
+        <joint name="rear_lidar_mount_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="rear_lidar_mount"/>
+            <origin xyz="-0.525 -0.3 0.09" rpy="0 0 ${pi}"/>
+        </joint>
+
+        <link name="rear_lidar"/>
+        <joint name="rear_lidar_fixed_joint" type="fixed">
+            <parent link="rear_lidar_mount"/>
+            <child link="rear_lidar"/>
+            <origin xyz="0 0 0.02" rpy="0 0 ${45*pi/180}"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: mobile_manipulator_robot_description
+    relative_path: urdf/robot.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/mobile_manipulator_robot.srdf
+  CONFIG:
+    author_name: Byeong-Kyu Ahn
+    author_email: byeongkyu@gmail.com
+    generated_timestamp: 1591545490

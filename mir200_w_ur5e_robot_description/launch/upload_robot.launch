@@ -1,8 +1,0 @@
-<launch>
-    <arg name="prefix" default=""/>
-
-    <param name="robot_description" command="$(find xacro)/xacro $(find mir200_w_ur5e_robot_description)/urdf/robot.urdf.xacro"/>
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-        <param name="tf_prefix" value="$(arg prefix)"/>
-    </node>
-</launch>
