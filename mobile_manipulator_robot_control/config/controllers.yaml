@@ -1,6 +1,6 @@
 joint_state_controller:
   type: joint_state_controller/JointStateController
-  publish_rate: 20
+  publish_rate: 40
 
 base_controller:
   type        : "diff_drive_controller/DiffDriveController"
@@ -14,7 +14,7 @@ base_controller:
   # Wheel separation and diameter. These are both optional.
   # diff_drive_controller will attempt to read either one or both from the
   # URDF if not specified as a parameter
-  wheel_separation : 0.76
+  wheel_separation : 0.78
   wheel_radius : 0.1
 
   # Wheel separation and radius multipliers
