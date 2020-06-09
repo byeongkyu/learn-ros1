@@ -4,8 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Grid1
-        - /Grid1/Offset1
         - /TF1/Frames1
         - /TF1/Tree1
       Splitter Ratio: 0.5147058963775635
@@ -270,19 +268,162 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        front_lidar:
+          Value: true
+        front_lidar_mount:
+          Value: true
+        gripper_eef:
+          Value: true
+        l_bogie_suspension:
+          Value: true
+        l_front_caster_rotate:
+          Value: true
+        l_front_caster_wheel:
+          Value: true
+        l_rear_caster_rotate:
+          Value: true
+        l_rear_caster_wheel:
+          Value: true
+        l_wheel:
+          Value: true
+        left_inner_finger:
+          Value: true
+        left_inner_finger_pad:
+          Value: true
+        left_inner_knuckle:
+          Value: true
+        left_outer_finger:
+          Value: true
+        left_outer_knuckle:
+          Value: true
+        map:
+          Value: true
+        mount_box:
+          Value: true
+        odom:
+          Value: true
+        r_bogie_suspension:
+          Value: true
+        r_front_caster_rotate:
+          Value: true
+        r_front_caster_wheel:
+          Value: true
+        r_rear_caster_rotate:
+          Value: true
+        r_rear_caster_wheel:
+          Value: true
+        r_wheel:
+          Value: true
+        rear_lidar:
+          Value: true
+        rear_lidar_mount:
+          Value: true
+        right_inner_finger:
+          Value: true
+        right_inner_finger_pad:
+          Value: true
+        right_inner_knuckle:
+          Value: true
+        right_outer_finger:
+          Value: true
+        right_outer_knuckle:
+          Value: true
+        robotiq_arg2f_base_link:
+          Value: true
+        ur5e_base:
+          Value: true
+        ur5e_base_link:
+          Value: true
+        ur5e_ee_link:
+          Value: true
+        ur5e_forearm_link:
+          Value: true
+        ur5e_shoulder_link:
+          Value: true
+        ur5e_tool0:
+          Value: true
+        ur5e_upper_arm_link:
+          Value: true
+        ur5e_wrist_1_link:
+          Value: true
+        ur5e_wrist_2_link:
+          Value: true
+        ur5e_wrist_3_link:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                front_lidar_mount:
+                  front_lidar:
+                    {}
+                l_bogie_suspension:
+                  l_rear_caster_rotate:
+                    l_rear_caster_wheel:
+                      {}
+                  l_wheel:
+                    {}
+                l_front_caster_rotate:
+                  l_front_caster_wheel:
+                    {}
+                mount_box:
+                  ur5e_base_link:
+                    ur5e_base:
+                      {}
+                    ur5e_shoulder_link:
+                      ur5e_upper_arm_link:
+                        ur5e_forearm_link:
+                          ur5e_wrist_1_link:
+                            ur5e_wrist_2_link:
+                              ur5e_wrist_3_link:
+                                ur5e_ee_link:
+                                  {}
+                                ur5e_tool0:
+                                  robotiq_arg2f_base_link:
+                                    gripper_eef:
+                                      {}
+                                    left_inner_knuckle:
+                                      {}
+                                    left_outer_knuckle:
+                                      left_outer_finger:
+                                        left_inner_finger:
+                                          left_inner_finger_pad:
+                                            {}
+                                    right_inner_knuckle:
+                                      {}
+                                    right_outer_knuckle:
+                                      right_outer_finger:
+                                        right_inner_finger:
+                                          right_inner_finger_pad:
+                                            {}
+                r_bogie_suspension:
+                  r_rear_caster_rotate:
+                    r_rear_caster_wheel:
+                      {}
+                  r_wheel:
+                    {}
+                r_front_caster_rotate:
+                  r_front_caster_wheel:
+                    {}
+                rear_lidar_mount:
+                  rear_lidar:
+                    {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -292,7 +433,7 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz/LaserScan
-      Color: 255; 255; 255
+      Color: 115; 210; 22
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
@@ -305,10 +446,40 @@ Visualization Manager:
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
-      Size (Pixels): 3
+      Size (Pixels): 10
       Size (m): 0.05000000074505806
-      Style: Squares
-      Topic: scan
+      Style: Points
+      Topic: /front_scan
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 239; 41; 41
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 10
+      Size (m): 0.05000000074505806
+      Style: Points
+      Topic: /rear_scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -446,7 +617,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.009999299421906471
+      Angle: 6.854534149169922e-7
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -456,11 +627,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 91.14436340332031
+      Scale: 91.72756958007812
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 0.4001120924949646
-      Y: -0.40239566564559937
+      X: 0.7811056971549988
+      Y: 0.5648650527000427
     Saved: ~
 Window Geometry:
   Displays:
