@@ -94,7 +94,10 @@
     </gazebo>
 
     <gazebo reference="front_lidar">
+        <!-- GPU Version-->
         <sensor type="gpu_ray" name="front_laser_sensor">
+        <!-- non GPU Version-->
+        <!-- <sensor type="ray" name="front_laser_sensor">-->
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>
             <update_rate>15</update_rate>
@@ -118,7 +121,10 @@
                     <stddev>0.01</stddev>
                 </noise>
             </ray>
+            <!-- GPU Version-->
             <plugin name="gazebo_ros_front_lidar_controller" filename="libgazebo_ros_gpu_laser.so">
+            <!-- non GPU Version-->
+            <!-- <plugin name="gazebo_ros_front_lidar_controller" filename="libgazebo_ros_laser.so"> -->
                 <topicName>front_scan</topicName>
                 <frameName>front_lidar</frameName>
             </plugin>
@@ -126,7 +132,10 @@
     </gazebo>
 
     <gazebo reference="rear_lidar">
+        <!-- GPU Version-->
         <sensor type="gpu_ray" name="rear_laser_sensor">
+        <!-- non GPU Version-->
+        <!-- <sensor type="ray" name="rear_laser_sensor">-->
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>
             <update_rate>15</update_rate>
@@ -150,7 +159,10 @@
                     <stddev>0.01</stddev>
                 </noise>
             </ray>
+            <!-- GPU Version-->
             <plugin name="gazebo_ros_rear_lidar_controller" filename="libgazebo_ros_gpu_laser.so">
+            <!-- non GPU Version-->
+            <!-- <plugin name="gazebo_ros_rear_lidar_controller" filename="libgazebo_ros_laser.so"> -->
                 <topicName>rear_scan</topicName>
                 <frameName>rear_lidar</frameName>
             </plugin>
