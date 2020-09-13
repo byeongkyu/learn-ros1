@@ -1,4 +1,4 @@
-# ros_tutorials3
+# learn-ros1
 
 <img src="./doc/robot_rviz.png" width="50%">
 
@@ -10,7 +10,7 @@
 $ mkdir -p ~/catkin_ws/src
 $ cd ~/catkin_ws/src
 $ wstool init
-$ wstool merge https://gist.githubusercontent.com/byeongkyu/03c0c6063835c470de594e3aa521d8a4/raw/ros_tutorials3.rosinstall
+$ wstool merge https://gist.githubusercontent.com/byeongkyu/03c0c6063835c470de594e3aa521d8a4/raw/learn-ros1.rosinstall
 $ wstool update
 $ rosdep install --from-paths . --ignore-src -r -y
 $ catkin build
