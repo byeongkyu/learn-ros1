@@ -14,6 +14,9 @@
     <!-- Mobile Robot -->
     <xacro:bogie_mobile_robot/>
 
+    <!-- D435 -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+
     <!-- Mount Box -->
     <link name="mount_box">
         <visual>
@@ -75,4 +78,7 @@
         <origin xyz="0 0 0.13" rpy="0 0 0"/>
     </joint>
 
+    <xacro:sensor_d435 parent="mount_box" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+        <origin xyz="-0.37 0 0.435" rpy="0 0 ${pi}"/>
+    </xacro:sensor_d435>
 </robot>

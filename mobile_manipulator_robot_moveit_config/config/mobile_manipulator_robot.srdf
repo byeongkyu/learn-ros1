@@ -16,7 +16,7 @@
         <joint name="ur5e_wrist_1_joint" />
         <joint name="ur5e_wrist_2_joint" />
         <joint name="ur5e_wrist_3_joint" />
-        <chain base_link="base_footprint" tip_link="gripper_eef" />
+        <chain base_link="ur5e_base_link" tip_link="gripper_eef" />
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="ready" group="arm">

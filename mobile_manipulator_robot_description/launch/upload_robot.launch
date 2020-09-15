@@ -1,4 +1,4 @@
 <launch>
-    <param name="robot_description" command="$(find xacro)/xacro $(find mobile_manipulator_robot_description)/urdf/robot.urdf.xacro"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(find mobile_manipulator_robot_description)/urdf/robot.urdf.xacro use_nominal_extrinsics:=true add_plug:=false"/>
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 </launch>

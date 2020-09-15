@@ -44,7 +44,7 @@ if __name__ == "__main__":
     pose_goal = geometry_msgs.msg.Pose()
 
     pose_goal.position.x = 0.525
-    pose_goal.position.y =  0.0
+    pose_goal.position.y =  -0.5
     pose_goal.position.z = 1.0
 
     quat = quaternion_from_euler(pi/2.0, -pi/2.0, pi/2.0)
