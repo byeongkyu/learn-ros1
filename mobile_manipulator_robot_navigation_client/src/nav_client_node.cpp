@@ -48,7 +48,7 @@ int main(int argc, char **argv)
     goal.target_pose.pose.position.z = 0;
 
     tf2::Quaternion q;
-    q.setRPY(0, 0, atof(argv[2]) * 3.141592654 / 180 );
+    q.setRPY(0, 0, atof(argv[3]) * 3.141592654 / 180.0 );
 
     goal.target_pose.pose.orientation.x = q[0];
     goal.target_pose.pose.orientation.y = q[1];
